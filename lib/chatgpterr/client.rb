@@ -1,14 +1,38 @@
-module Chatgpterr
+# frozen_string_literal: true
+
+require "faraday"
+
+module ChatgptErr
   class Client
-    def initialize(access_token: nil, organization_id: nil, uri_base: nil, request_timeout: nil)
-      Chatgpterr.configuration.access_token = access_token if access_token
-      Chatgpterr.configuration.organization_id = organization_id if organization_id
-      Chatgpterr.configuration.uri_base = uri_base if uri_base
-      Chatgpterr.configuration.request_timeout = request_timeout if request_timeout
+    def self.chat_completions(parameters: {})
+      connection(path: '/chat/completions').post do |req|
+        req.body = parameters.to_json
+      end
     end
 
-    def ping
-      puts "pong"
+    private
+
+    def self.config
+      ChatgptErr.configuration
+    end
+
+    def self.uri
+      "#{config.uri_base}#{config.api_version}"
+    end
+
+    def self.connection(path:)
+      Faraday.new(
+        url: "#{uri}#{path}",
+        headers: headers
+      )
+    end
+
+    def self.headers
+      {
+        "Content-Type" => "application/json",
+        "Authorization" => "Bearer #{config.access_token}",
+        "ChatgptErr-Organization" => config.organization_id
+      }
     end
   end
 end

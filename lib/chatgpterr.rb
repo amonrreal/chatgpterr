@@ -1,9 +1,11 @@
-require 'httparty'
+# frozen_string_literal: true
 
 require_relative 'chatgpterr/client'
+require_relative 'chatgpterr/explain'
+require_relative 'chatgpterr/middleware'
 require_relative 'chatgpterr/version'
 
-module Chatgpterr
+module ChatgptErr
   class Error < StandardError; end
   class ConfigurationError < Error; end
 
@@ -26,7 +28,7 @@ module Chatgpterr
     def access_token
       return @access_token if @access_token
 
-      error_text = 'OpenAI access token missing! See https://github.com/alexrudall/ruby-openai#usage'
+      error_text = 'OpenAI access token missing!'
       raise ConfigurationError, error_text
     end
   end
@@ -36,7 +38,7 @@ module Chatgpterr
   end
 
   def self.configuration
-    @configuration ||= Chatgpterr::Configuration.new
+    @configuration ||= ChatgptErr::Configuration.new
   end
 
   def self.configure
