@@ -2,12 +2,12 @@ require_relative 'lib/chatgpterr/version'
 
 Gem::Specification.new do |spec|
   spec.name          = 'chatgpterr'
-  spec.version       = Chatgpterr::VERSION
+  spec.version       = ChatgptErr::VERSION
   spec.authors       = ['Alvaro Monrreal']
   spec.email         = ['alvaro.monrreal@gmail.com']
 
-  spec.summary       = 'Chatgpterr is a Ruby wrapper for the OpenAI API. It provides an explanation of errors on Ruby on Rails projects using ChatGPT.'
-  spec.description   = 'Chatgpterr is a Ruby wrapper for the OpenAI API. It provides an explanation of errors on Ruby on Rails projects using ChatGPT.'
+  spec.summary       = 'ChatgptErr is a Ruby wrapper for the OpenAI API. It provides an explanation of errors on Ruby on Rails projects using ChatGPT.'
+  spec.description   = 'ChatgptErr is a Ruby wrapper for the OpenAI API. It provides an explanation of errors on Ruby on Rails projects using ChatGPT.'
   spec.homepage      = 'https://github.com/amonrreal/chatgpterr'
   spec.license       = 'MIT'
   spec.required_ruby_version = Gem::Requirement.new('>= 2.3.0')
@@ -24,6 +24,4 @@ Gem::Specification.new do |spec|
   spec.bindir        = 'exe'
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
-
-  spec.add_dependency 'httparty', '>= 0.14.0'
 end
